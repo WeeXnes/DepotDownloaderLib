@@ -12,6 +12,8 @@ Built with:
 
 Uses:
 <a href="https://github.com/SteamRE/DepotDownloader">SteamRE/DepotDownloader</a>
+<br>
+REQUIRES DOTNET 7
 </div>
 
 Install via <a href="https://www.nuget.org/packages/DepotDownloaderLib">nuget</a>: 
