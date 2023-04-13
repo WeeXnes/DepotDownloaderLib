@@ -81,6 +81,9 @@ DepotDownloaderLib.onConsoleInput += () =>
 ```
 This can be used to for example get the 2FA code from a UserInput inside the GUI of your app
 
+<h1>How to use DepotDownloaderLib with a GUI (WPF specifically)</h1>
+In my Repo <a href="https://github.com/WeeXnes/DepotDownloaderGuiExample">WeeXnes/DepotDownloaderGuiExample</a> you can see how to use this library with a GUI(WPF)
+
 <h3>Supported Argument Types:</h3>
 
 ```cs
