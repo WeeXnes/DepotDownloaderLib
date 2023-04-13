@@ -5,7 +5,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Title>WeeXnes</Title>
+        <Title>DepotDownloaderLib</Title>
+        <Version>1.0.2</Version>
+        <PackageProjectUrl>https://github.com/WeeXnes/DepotDownloaderLib</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/WeeXnes/DepotDownloaderLib</RepositoryUrl>
+        <Authors>WeeXnes</Authors>
     </PropertyGroup>
 
     <ItemGroup>
