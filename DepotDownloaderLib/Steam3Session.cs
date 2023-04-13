@@ -570,7 +570,14 @@ namespace DepotDownloader
                     do
                     {
                         Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
-                        logonDetails.TwoFactorCode = Console.ReadLine();
+                        if (DepotDownloaderLib.onConsoleInput != null)
+                        {
+                            logonDetails.AuthCode = DepotDownloaderLib.onConsoleInput.Invoke();
+                        }
+                        else
+                        {
+                            logonDetails.AuthCode = Console.ReadLine();
+                        }
                     } while (String.Empty == logonDetails.TwoFactorCode);
                 }
                 else if (isLoginKey)
