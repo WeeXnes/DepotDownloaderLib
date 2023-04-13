@@ -34,7 +34,7 @@ List<DownloaderArgument> arguments = new List<DownloaderArgument>();
 ```
 
 then you add your add your desired Arguments by adding objects of type "DownloaderArgument" to your list, these take 2 parameters (Argument Type and Argument Value), like in following Example.
-Add the bottom of the ReadMe File you will find a list of all supported argument types.
+Add the <a href="#supported-argument-types">bottom</a> of the ReadMe File you will find a list of all supported argument types.
 The Following Example downloads a specific Manifest from R6S, so your account needs to own this game to be able to download this manifest
 
 ```cs
