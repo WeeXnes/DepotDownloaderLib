@@ -109,6 +109,32 @@ public static class DepotDownloaderLib
             StartDownloadProc(downloaderArguments);
         }
     }
+    public static void StartDownload(List<List<DownloaderArgument>> downloaderArgumentsList, bool startAsWorker = false)
+    {
+        if (startAsWorker)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (o, args) =>
+            {
+                foreach (List<DownloaderArgument> ArgsList in downloaderArgumentsList)
+                {
+                    StartDownloadProc(ArgsList);
+                }
+            };
+            worker.RunWorkerCompleted += (o, args) =>
+            {
+                Console.WriteLine("Download finished");
+            };
+            worker.RunWorkerAsync();
+        }
+        else
+        {
+            foreach (List<DownloaderArgument> ArgsList in downloaderArgumentsList)
+            {
+                StartDownloadProc(ArgsList);
+            }
+        }
+    }
     private async static void StartDownloadProc(List<DownloaderArgument> downloaderArguments)
     {
         List<string> argumentsStringList = new List<string>();
