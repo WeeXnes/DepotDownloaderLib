@@ -40,6 +40,28 @@ public enum ArgType
 }
 
 
+public class DownloadObj
+{
+    public List<DownloaderArgument> argsList { get; set; }
+
+    public DownloadObj(List<DownloaderArgument> _list)
+    {
+        this.argsList = _list;
+    }
+
+    public string[] getArgStringList()
+    {
+        List<string> argumentsStringList = new List<string>();
+        foreach (var argument in this.argsList)
+        {
+            string[] argArr = argument.GetCommandArray();
+            argumentsStringList.Add(argArr[0]);
+            argumentsStringList.Add(argArr[1]);
+        }
+        return argumentsStringList.ToArray();
+    }
+}
+
 public class DownloaderArgument
 {
     public ArgType argType { get; set; }
@@ -89,36 +111,23 @@ public static class DepotDownloaderLib
     /// </summary>
     /// <param name="downloaderArguments">provides the arguments for the downloads</param>
     /// <param name="startFromGui">starts the download process as a backgroundWorker (used for GUI use-cases)</param>
-    public static void StartDownload(List<DownloaderArgument> downloaderArguments, bool startAsWorker = false)
+    
+    
+
+    public static async void RunDownload(List<DownloadObj> downloads, bool runAsWorker)
     {
-        if (startAsWorker)
+      
+
+        
+
+        if (runAsWorker)
         {
             BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (o, args) =>
+            worker.DoWork += async (o, args) =>
             {
-                StartDownloadProc(downloaderArguments);
-            };
-            worker.RunWorkerCompleted += (o, args) =>
-            {
-                Console.WriteLine("Download finished");
-            };
-            worker.RunWorkerAsync();
-        }
-        else
-        {
-            StartDownloadProc(downloaderArguments);
-        }
-    }
-    public static void StartDownload(List<List<DownloaderArgument>> downloaderArgumentsList, bool startAsWorker = false)
-    {
-        if (startAsWorker)
-        {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (o, args) =>
-            {
-                foreach (List<DownloaderArgument> ArgsList in downloaderArgumentsList)
+                foreach (var obj in downloads)
                 {
-                    StartDownloadProc(ArgsList);
+                    await MainAsync(obj.getArgStringList());
                 }
             };
             worker.RunWorkerCompleted += (o, args) =>
@@ -129,23 +138,14 @@ public static class DepotDownloaderLib
         }
         else
         {
-            foreach (List<DownloaderArgument> ArgsList in downloaderArgumentsList)
+            foreach (var obj in downloads)
             {
-                StartDownloadProc(ArgsList);
+                await MainAsync(obj.getArgStringList());
             }
         }
-    }
-    private async static void StartDownloadProc(List<DownloaderArgument> downloaderArguments)
-    {
-        List<string> argumentsStringList = new List<string>();
-        foreach (var argument in downloaderArguments)
-        {
-            string[] argArr = argument.GetCommandArray();
-            argumentsStringList.Add(argArr[0]);
-            argumentsStringList.Add(argArr[1]);
-        }
-        
-        await MainAsync(argumentsStringList.ToArray());
+
+
+
     }
     static async Task<int> MainAsync(string[] args)
         {
