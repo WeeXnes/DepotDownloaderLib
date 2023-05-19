@@ -572,11 +572,11 @@ namespace DepotDownloader
                         Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
                         if (DepotDownloaderLib.onConsoleInput != null)
                         {
-                            logonDetails.AuthCode = DepotDownloaderLib.onConsoleInput.Invoke();
+                            logonDetails.TwoFactorCode = DepotDownloaderLib.onConsoleInput.Invoke();
                         }
                         else
                         {
-                            logonDetails.AuthCode = Console.ReadLine();
+                            logonDetails.TwoFactorCode = Console.ReadLine();
                         }
                     } while (String.Empty == logonDetails.TwoFactorCode);
                 }
