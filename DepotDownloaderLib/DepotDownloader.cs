@@ -96,6 +96,10 @@ public class DownloaderArgument
 public static class DepotDownloaderLib
 {
     /// <summary>
+    /// Function gets called after a worker has finished the download list and throws the completed event
+    /// </summary>
+    public static Action onDownloadCompleted = null;
+    /// <summary>
     /// Intercepts the Percentage Output from DepotDownloader, u can use this to for example show the current Download Progress as a ProgressBar in your GUI
     /// </summary>
     /// <param name="percentage (float)">contains the current download percentage as float</param>
@@ -133,6 +137,8 @@ public static class DepotDownloaderLib
             worker.RunWorkerCompleted += (o, args) =>
             {
                 Console.WriteLine("Download finished");
+                if (onDownloadCompleted != null)
+                    onDownloadCompleted.Invoke();
             };
             worker.RunWorkerAsync();
         }
